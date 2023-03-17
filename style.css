@@ -1,0 +1,78 @@
+body {
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #121212;
+}
+
+.image-box {
+  --box-width: 300px;
+  --box-height: 300px;
+  display: grid;
+  width: var(--box-width);
+  height: var(--box-height);
+}
+
+.image {
+  max-width: 100%;
+  pointer-events: none;
+}
+
+.line-indicator::before {
+  --self-width: 2px;
+  --x-pos: calc(
+    ((var(--box-width) / 100) * var(--current-value)) - (var(--self-width) / 2)
+  );
+  content: "";
+  display: block;
+  width: var(--self-width);
+  height: 100%;
+  background: #fff;
+  transform: translateX(var(--x-pos));
+  will-change: transform;
+  pointer-events: none;
+}
+
+.image-2 {
+  clip-path: inset(0% calc(100% - (1% * var(--current-value))) 0% 0%);
+  will-change: clip-path;
+}
+
+.image,
+.line-indicator {
+  grid-area: 1 / 1;
+}
+
+.slicer {
+  --thumb-size: 20px;
+  grid-area: 1 / 1;
+  margin: 0 calc(-1 * (var(--thumb-size) / 2));
+  background-color: transparent;
+  pointer-events: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.slicer::-webkit-slider-thumb {
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  background: #fff;
+  border-radius: 50%;
+  transform: translate3d(0, 0, 0);
+  cursor: ew-resize;
+  pointer-events: initial;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.slicer::-moz-range-thumb {
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  background: #fff;
+  border-radius: 50%;
+  transform: translate3d(0, 0, 0);
+  cursor: ew-resize;
+  pointer-events: initial;
+  appearance: none;
+}
